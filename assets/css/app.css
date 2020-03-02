@@ -1,0 +1,14 @@
+body {
+    background-color: lightgray;
+}
+.logo-ginfo-formulaire{
+    max-width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titre-projet-machines{
+    text-align: center;
+    color: black;
+}

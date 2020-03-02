@@ -25,13 +25,13 @@ abstract class AbstractConfigurator
     /** @internal */
     protected $definition;
 
-    public function __call(string $method, array $args)
+    public function __call($method, $args)
     {
         if (method_exists($this, 'set'.$method)) {
             return $this->{'set'.$method}(...$args);
         }
 
-        throw new \BadMethodCallException(sprintf('Call to undefined method %s::%s()', static::class, $method));
+        throw new \BadMethodCallException(sprintf('Call to undefined method %s::%s()', \get_class($this), $method));
     }
 
     /**

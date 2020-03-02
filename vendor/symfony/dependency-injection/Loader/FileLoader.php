@@ -48,16 +48,18 @@ abstract class FileLoader extends BaseFileLoader
     /**
      * {@inheritdoc}
      *
-     * @param bool|string $ignoreErrors Whether errors should be ignored; pass "not_found" to ignore only when the loaded resource is not found
+     * @param bool|string          $ignoreErrors Whether errors should be ignored; pass "not_found" to ignore only when the loaded resource is not found
+     * @param string|string[]|null $exclude      Glob patterns to exclude from the import
      */
-    public function import($resource, $type = null, $ignoreErrors = false, $sourceResource = null, $exclude = null)
+    public function import($resource, $type = null, $ignoreErrors = false, $sourceResource = null/*, $exclude = null*/)
     {
         $args = \func_get_args();
 
         if ($ignoreNotFound = 'not_found' === $ignoreErrors) {
             $args[2] = false;
         } elseif (!\is_bool($ignoreErrors)) {
-            throw new \TypeError(sprintf('Invalid argument $ignoreErrors provided to %s::import(): boolean or "not_found" expected, %s given.', static::class, \gettype($ignoreErrors)));
+            @trigger_error(sprintf('Invalid argument $ignoreErrors provided to %s::import(): boolean or "not_found" expected, %s given.', \get_class($this), \gettype($ignoreErrors)), E_USER_DEPRECATED);
+            $args[2] = (bool) $ignoreErrors;
         }
 
         try {
@@ -159,7 +161,7 @@ abstract class FileLoader extends BaseFileLoader
         $excludePrefix = null;
         $excludePatterns = $parameterBag->unescapeValue($parameterBag->resolveValue($excludePatterns));
         foreach ($excludePatterns as $excludePattern) {
-            foreach ($this->glob($excludePattern, true, $resource, true, true) as $path => $info) {
+            foreach ($this->glob($excludePattern, true, $resource, false, true) as $path => $info) {
                 if (null === $excludePrefix) {
                     $excludePrefix = $resource->getPrefix();
                 }

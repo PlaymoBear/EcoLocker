@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {% if error %}
+        <div class="card">
+            <div class="titre-projet-machines">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if not app.user %}
+    <form action="{{ path('home') }}", method="post">
+    <div class="login-box">
+        <div class="card">
+            <div class="body">
+                <div class="titre-projet-machines">
+                    <h4>Projet Claqué 1A - Machine</h4>
+                </div>
+                <form id="sign_in" method="POST" novalidate="novalidate">
+                    <img class="logo-ginfo-formulaire" src="https://wiki.centrale-marseille.fr/ginfo/_detail/logobest.png?id=index" alt="">
+
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="_username" placeholder="E-Mail" required="" autofocus="" aria-required="true">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="_password" placeholder="Password" required="" aria-required="true">
+                        </div>
+                    </div>
+                    <div class="col-xs-8 p-t-5 col-xs-offset-5">
+                        <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
+                        <label for="rememberme">Remember Me</label>
+                    </div>
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <button class="btn btn-block bg-green waves-effect" type="submit">Log In </button>
+                    </div>
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <button class="btn btn-block bg-blue waves-effect" type="submit">Connexion via MyCA </button>
+                    </div>
+                    <div class="row m-t-15 m-b--20">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </form>
+    {% else %}
+    <b>
+        Tu es déjà connecté
+    </b>
+    {% endif %}
+{% endblock %}

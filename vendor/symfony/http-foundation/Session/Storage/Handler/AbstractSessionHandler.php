@@ -42,19 +42,26 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     }
 
     /**
+     * @param string $sessionId
+     *
      * @return string
      */
-    abstract protected function doRead(string $sessionId);
+    abstract protected function doRead($sessionId);
 
     /**
+     * @param string $sessionId
+     * @param string $data
+     *
      * @return bool
      */
-    abstract protected function doWrite(string $sessionId, string $data);
+    abstract protected function doWrite($sessionId, $data);
 
     /**
+     * @param string $sessionId
+     *
      * @return bool
      */
-    abstract protected function doDestroy(string $sessionId);
+    abstract protected function doDestroy($sessionId);
 
     /**
      * @return bool
@@ -114,7 +121,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     {
         if (!headers_sent() && filter_var(ini_get('session.use_cookies'), FILTER_VALIDATE_BOOLEAN)) {
             if (!$this->sessionName) {
-                throw new \LogicException(sprintf('Session name cannot be empty, did you forget to call "parent::open()" in "%s"?.', static::class));
+                throw new \LogicException(sprintf('Session name cannot be empty, did you forget to call "parent::open()" in "%s"?.', \get_class($this)));
             }
             $cookie = SessionUtils::popSessionCookie($this->sessionName, $sessionId);
 
