@@ -12,3 +12,6 @@ import '../css/app.css';
 // import $ from 'jquery';
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+
+const imagesContext = require.context('../images', true, /\.(png|jpg|jpeg|gif|ico|svg|webp)$/);
+imagesContext.keys().forEach(imagesContext);

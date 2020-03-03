@@ -17,10 +17,10 @@
         <div class="card">
             <div class="body">
                 <div class="titre-projet-machines">
-                    <h4>Projet Claqué 1A - Machine</h4>
+                    <h4>Eco'Locker</h4>
                 </div>
                 <form id="sign_in" method="POST" novalidate="novalidate">
-                    <img class="logo-ginfo-formulaire" src="https://wiki.centrale-marseille.fr/ginfo/_detail/logobest.png?id=index" alt="">
+                    <img class="logo-ginfo-formulaire" src="build/images/logo_locker.bc234869.png" alt="">
 
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -38,15 +38,11 @@
                             <input type="password" class="form-control" name="_password" placeholder="Password" required="" aria-required="true">
                         </div>
                     </div>
-                    <div class="col-xs-8 p-t-5 col-xs-offset-5">
-                        <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
-                        <label for="rememberme">Remember Me</label>
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <button class="btn btn-block bg-green waves-effect" type="submit">Connexion </button>
                     </div>
                     <div class="col-xs-4 col-xs-offset-4">
-                        <button class="btn btn-block bg-green waves-effect" type="submit">Log In </button>
-                    </div>
-                    <div class="col-xs-4 col-xs-offset-4">
-                        <button class="btn btn-block bg-blue waves-effect" type="submit">Connexion via MyCA </button>
+                        <a href="{{ path("security_registration") }}" class="btn btn-block bg-blue waves-effect" type="button">Inscription</a>
                     </div>
                     <div class="row m-t-15 m-b--20">
                     </div>
@@ -56,8 +52,13 @@
     </div>
     </form>
     {% else %}
-    <b>
-        Tu es déjà connecté
-    </b>
+        <div class="body">
+                <p>
+                <div class="col-xs-8 col-xs-offset-2">
+                    <a href="{{ path("security_registration") }}" class="btn btn-block bg-blue waves-effect" type="button">Prendre un casier</a>
+                </div>
+                </p>
+        </div>
+
     {% endif %}
 {% endblock %}

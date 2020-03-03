@@ -9,7 +9,7 @@
     <meta name="Keywords" content="ginfo, groupe, informatique, it, association">
     <meta name="Copyright" content="GINFO">
     <meta name="Revisit-After" content="15 days">
-    <title>{% block titre_page %}Projet Claqué Mathis{% endblock %}</title>
+    <title>{% block titre_page %}Eco'Locker{% endblock %}</title>
     <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
     <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
@@ -22,7 +22,7 @@
           rel="stylesheet">
 </head>
 
-<body {% block additionnal_body_block %}{% endblock %} class="theme-deep-orange {% block additionnal_body_class %}{% endblock %}">
+<body {% block additionnal_body_block %}{% endblock %} class="theme-light-green" {% block additionnal_body_class %}{% endblock %}">
 
 <nav class="navbar">
     <div class="container-fluid">
@@ -33,20 +33,16 @@
                 {% endblock %}
                 <a href="javascript:void(0);" class="bars"></a>
             {% endif %}
-
-            <a class="navbar-brand" href="/home">
-                Machines
-            </a>
-
         </div>
+        <div class="navbar_brand">
+            <a class="navbar-brand" href="/home">
+                Eco'Locker
+            </a>
+        </div>
+
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('ROLE_USER') %}
-                    <li>
-                        <a href="">
-                            <i class="material-icons">settings</i>
-                        </a>
-                    </li>
                     <li class="'nav-item">
                         <a href="{{ path('security_logout') }}" class="nav-link">
                             Déconnexion
@@ -59,33 +55,16 @@
     </div>
 </nav>
 
-<section>
-    <aside id="leftsidebar" class="sidebar">
-        <div class="menu">
-            <ul class="list">
-                <li class="header">Menu</li>
-                <li {% if app.request.pathInfo starts with "/page1" %}class="active"{% endif %}>
-                    <a href="/page1">
-                        <i class="material-icons">search</i> <span>Page 1</span>
-                    </a>
-                </li>
-                <li {% if app.request.pathInfo starts with "/page2" %}class="active"{% endif %}>
-                    <a href="/page2" id="link_add">
-                        <i class="material-icons">add</i> <span>Page 2</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </aside>
+<section class="content">
 </section>
 
-<section class="content">
+
+<body class="content">
     <div class="container-fluid">
         {% block content %}
         {% endblock %}
-
     </div>
-</section>
+</body>
 
 <div id="app-notifs">
     {% for type, messages in app.flashes %}

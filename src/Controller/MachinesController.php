@@ -35,4 +35,13 @@ class MachinesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/prendrecasier",name="prendre_casier")
+     */
+
+    public function prendrecasier() {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        return $this->render('machines/prendrecasier.html.twig');
+    }
+
 }
